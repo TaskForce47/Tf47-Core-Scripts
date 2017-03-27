@@ -1,18 +1,18 @@
 /*
-	
+
 	author: TF47  mindbl4ster
-	
+
 	description:
 		tracking units by markers on map.
 	parameter:
 		0: BOOL	(optional)		-	false:stop tracking
-		1: ARRAY (optional)		-	side to track 
-		2: ARRAY (optional)		-	types to track 
+		1: ARRAY (optional)		-	side to track
+		2: ARRAY (optional)		-	types to track
 	return
 		nothing
 	example
 		[] call tf47_debug_fnc_trackUnits;
-		
+
 */
 params [
 	["_tracking",false],
@@ -61,11 +61,11 @@ TF47_DEBUG_UNITTRACKING_TYPES = _typesToTrack;
 			{
 				private _pos 	=	getPos _x;
 				private _side	=	side _x;
-				
+
 				if( _side in TF47_DEBUG_UNITTRACKING_SIDES)then{
-					
+
 					if( _x isEqualTo vehicle _x )then{
-					
+
 						if (_x getVariable ["tf47_debug_unitTracking",""] isEqualTo "") then{
 
 							private _str	=	format ["tf47_debug_trackUnit_%1_%2",_pos,_side];
@@ -77,17 +77,17 @@ TF47_DEBUG_UNITTRACKING_TYPES = _typesToTrack;
 								case(INDEPENDENT):{"n_inf"};
 								default{"c_unknown"};
 							};
-						
+
 							_mkr 	setMarkerTypeLocal (_pre);
 							_mkr 	setMarkerSizeLocal	[0.5,0.5];
-							_mkr 	setMarkerAlphaLocal 1;	
-							
+							_mkr 	setMarkerAlphaLocal 1;
+
 							_x setVariable ["tf47_debug_unitTracking",_mkr];
-							
+
 						}else{
-						
+
 							private _mkr = _x getVariable ["tf47_debug_unitTracking",""];
-							
+
 							if( alive _x)then{
 								_mkr setMarkerPosLocal _pos;
 								private _pre	=	switch(_side)do{
@@ -96,23 +96,23 @@ TF47_DEBUG_UNITTRACKING_TYPES = _typesToTrack;
 									case(INDEPENDENT):{"n_inf"};
 									default{"c_unknown"};
 								};
-								_mkr 	setMarkerTypeLocal _pre;				
+								_mkr 	setMarkerTypeLocal _pre;
 							}else{
 								_x setVariable ["tf47_debug_unitTracking",nil];
 								deleteMarkerLocal _mkr;
 							};
-							
+
 						};
 					};
 				};
 			}forEach allUnits;
 		};
-		
+
 		{
 			private _pos 	=	getPos _x;
-			private _side	=	if( count crew _x != 0 )then{ 
-				side (	(crew _x) select 0	) 
-			}else{ 
+			private _side	=	if( count crew _x != 0 )then{
+				side (	(crew _x) select 0	)
+			}else{
 				//read config entry for empty vehicles
 				private _number	=	getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "side");
 				private _return = switch(_number)do{
@@ -143,7 +143,7 @@ TF47_DEBUG_UNITTRACKING_TYPES = _typesToTrack;
 								if ( "ship" in _parents ) then { _main	=	"naval" };
 								if ( "air" in _parents ) then { _main	=	"air" };
 							};
-						};	
+						};
 						private _str	=	format ["tf47_debug_trackUnit_%1_%2",_pos,_side];
 						private _mkr	=	createMarkerLocal [_str, _pos];
 								_mkr	setMarkerShapelocal "ICON";
@@ -178,8 +178,8 @@ TF47_DEBUG_UNITTRACKING_TYPES = _typesToTrack;
 					};
 				};
 			};
-		}forEach vehicles;	
-		
+		}forEach vehicles;
+
 	}else{
 		{
 			private _mkr = toArray _x; _mkr resize 20;
@@ -200,3 +200,4 @@ TF47_DEBUG_UNITTRACKING_TYPES = _typesToTrack;
 0.1,
 []
 ] call CBA_fnc_addPerFrameHandler;
+true

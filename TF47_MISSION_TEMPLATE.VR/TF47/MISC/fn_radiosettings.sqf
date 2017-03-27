@@ -9,11 +9,11 @@ if(isclass (configfile >> "CfgPatches" >> "task_force_radio")	)then{
 		};
 		case(1):{
 			tf_radio_channel_name = "Radio Communication - Event";
-			tf_radio_channel_password = "Alpha48";		
+			tf_radio_channel_password = "Alpha48";
 		};
 		case(2):{
 			tf_radio_channel_name = "Radio Communication - DEV";
-			tf_radio_channel_password = "Zulu66";		
+			tf_radio_channel_password = "Zulu66";
 		};
 	};
 	//tf_freq_west_lr = 31;
@@ -26,5 +26,7 @@ if(isclass (configfile >> "CfgPatches" >> "task_force_radio")	)then{
 	tf_same_sw_frequencies_for_side = true;
 	tf_same_lr_frequencies_for_side = true;
 	TF_defaultWestRiflemanRadio = "tf_anprc152";
+	true
+}else{
+	false
 };
-systemchat "[ INFO ] >> 'Radiosettings' >> Variables set ...";

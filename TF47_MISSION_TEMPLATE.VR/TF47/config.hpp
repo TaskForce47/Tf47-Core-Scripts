@@ -8,15 +8,6 @@
 #define RADIOCHANNEL 1
 
 /*
-	set option to display custom intro on missionstart
-	intro will not be shown on jip clients
-	INTRO	false	-	do NOT show intro
-	INTRO	true	-	do show intro
-*/
-
-#define INTRO	true
-
-/*
 	set option to activate tracker for specific side and unittypes on map
 	TRACKING true	-	will show markers on map
 	TRACKING false	-	will not track units
@@ -37,3 +28,24 @@
 */
 
 #define TYPES	["car","ship","air","static","tank"]
+
+/*
+  active option to track and enforce tf47 whitelst with reporting feature to tf47 gadget
+  CAUTION: extDB3 needed for extensioncalls
+  WHITELIST true - whitelist enforcing active
+  WHITELIST false - whitelist enforcing not active
+
+  if you want to use the whitelist functions make sure you have an active connection to a database
+  furthermore player characters need following initialisation:
+
+  nothing 0
+  helo 1
+  jet 2
+  tank 3
+  builder 4
+  jtfc 5
+
+  this setVariable ["tf47_whitelist_specialCharacter",0];
+*/
+
+#define WHITELIST true

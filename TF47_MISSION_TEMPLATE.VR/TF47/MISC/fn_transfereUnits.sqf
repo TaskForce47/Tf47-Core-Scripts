@@ -1,30 +1,30 @@
 /*
-	
+
 	author: TF47  mindbl4ster
-	
-	credits: blaubär [W]
-	
+
+	credits: blaubï¿½r [W]
+
 	last edited: 2017.01.14
-	
+
 	description:
 		automated system for balancing groups between server and headlessclients. the system requieres the arma 3 modification @cba_a3.
 		if one or more curators are used in the mission the system will automaticly apply eventhandlers to transfere placed groups and make them editable for all curator entities.
 		on the serverside of things there will be a loop to detect created groups and automaticly transfere them.
 		if headlessclients need to be reserved for special purposses initialise them with:
 			this setVariable ["tf47_core_hc_isReserved",true];
-			
+
 	localtity of file execution:
 		global
-			
+
 	parameter:
 		nothing
-		
+
 	return
 		nothing
-		
+
 	example
 		n.a.
-		
+
 */
 
 
@@ -50,7 +50,7 @@
     false
 } count (entities "moduleCurator_F");
 
-if !isServer exitWith {};
+if !isServer exitWith {true};
 
 [
 {
@@ -83,10 +83,10 @@ if !isServer exitWith {};
 		//transfere unit from client (curator) to server
 		_group setGroupOwner 0;
 	};
-	
+
 	//create feedback arrays
-    private _hcClientIDs = _activeHCs apply {owner _x};		
-    private _hcsWithLoad = _hcClientIDs apply {[0, _x]};	
+    private _hcClientIDs = _activeHCs apply {owner _x};
+    private _hcsWithLoad = _hcClientIDs apply {[0, _x]};
 
 	//quick search through all groups
     {
@@ -104,5 +104,6 @@ if !isServer exitWith {};
     _hcsWithLoad sort true;
 	//transfere unit from zeus to server or hc with lowest load
     _group setGroupOwner ((_hcsWithLoad select 0) select 1);
-	
+
 }] call CBA_fnc_addEventHandler;
+true

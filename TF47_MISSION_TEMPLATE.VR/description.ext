@@ -1,0 +1,6 @@
+#include "TF47\ACE\aceSettings.hpp"
+
+class cfgfunctions
+{
+	#include "tf47\tf47_cfgfunctions.hpp"
+};
