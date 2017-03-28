@@ -36,7 +36,7 @@
 */
 #include "..\tf47_macros.hpp"
 if !isServer exitWith { /* client does not need to do that */ };
-
+if !( getNumber (missionConfigFile >> "tf47_settings" >> "basicReport" >> "value") > 0 ) exitWith{};
 params [
   ["_action",0,[0,""]], //string
   ["_comment",""],
@@ -77,7 +77,12 @@ if(_playerid isEqualTo "")then{
 };
 
 // set some deprecated vars for compability reasons
-private _tickets = [TF47_helper_playerFaction,0] call BIS_fnc_respawnTickets; // any changes should happen befor calling this function
+private _tickets = if ( getNumber (missionConfigFile >> "tf47_settings" >> "respawnTickets" >> "value") > 0 ) then{
+  [TF47_helper_playerFaction,0] call BIS_fnc_respawnTickets; // any changes should happen befor calling this function
+};
+else{
+  0
+};
 if (_tickets < 0)then{_tickets = 0}; // in case respawntickets are not used
 private _dbChange = 0;
 private _missionID = 1; // use something else

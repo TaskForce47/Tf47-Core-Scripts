@@ -19,7 +19,7 @@
 if !isServer exitWith { /* client does not need to track vehicles */ };
 params [
   ["_builder", objNull, ["",objnull] ],
-  ["_objectToWatch", objNull]
+  ["_objectToWatch", objNull, [objNull]]
 ];
 
 if !( _objectToWatch isEqualType objNull )exitWith{

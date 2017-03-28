@@ -62,5 +62,28 @@ class tf47_settings
     value = 1;
     type = "SCALAR";
   };
+  class basicReport
+  {
+    /*
+      setting for automated report to gadget-log
+      report to database is serversided.
+      make sure you call [97,"lost mk18 found",""] call tf47_whitelist_fnc_reportToDatabase; via remoteexec
+      more information in function description
+      value = 0 off
+      value = 1 on
+    */
+    value = 1;
+    type = "SCALAR";
+  };
+  class respawnTickets
+  {
+    /*
+      setting for integration of automated ticketmodification
+      value = 0 off
+      value = 1 on
+    */
+    value = 1;
+    type = "SCALAR";
+  };
 };
 #include "ACE\aceSettings.hpp"
