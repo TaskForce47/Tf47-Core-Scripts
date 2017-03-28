@@ -27,16 +27,15 @@ DTRACE_1("[ INFO ] > 'Whitelist' > Processing stack ...");
 {
   _x params ["_obj", "_permissionID", "_val"];
   if(isNil "_val")then{_val = false};
-  tf47_whitelist_serverToClientPermissionFeedback = if !(_val isEqualType true) then{
+  _val = if !(_val isEqualType true) then{
     false
   }else{
     _val
   };
   if(_obj != objNull && isPlayer _obj)then{
       DTRACE_3("[ INFO ] > 'Whitelist' > Sending answer to: ",(owner _obj),_x);
-      (owner _obj) publicVariableClient "tf47_whitelist_serverToClientPermissionFeedback";
+      [[_val],{_this call tf47_whitelist_fnc_setClientPermission}] remoteExec ["call",(owner _obj)];
   };
-  tf47_whitelist_serverToClientPermissionFeedback = nil;
 }forEach _stackToProcess;
 
 {

@@ -51,33 +51,6 @@ tf47_whitelist_clientToServerPermissionRequest = switch (	_specialState )do {
 };
 publicVariableServer "tf47_whitelist_clientToServerPermissionRequest";
 
-"tf47_whitelist_serverToClientPermissionFeedback" addPublicVariableEventHandler {
-  params ["","_vars"];
-  _vars params [
-		["_permission", false, [false] ]
-	];
-  private _specialState = player getVariable ["tf47_whitelist_specialCharacter",0];
-	//set default values
-	TF47_PERMISSION_BUILDER = false;
-	TF47_PERMISSION_ARMOUR = false;
-	TF47_PERMISSION_PLANE = false;
-	TF47_PERMISSION_HELO = false;
-	TF47_PERMISSION_JTFC = false;
-	//apply DB entry
-  switch (	_specialState )do {
-  	case(1):{ TF47_PERMISSION_HELO = _permission; };
-    case(2):{ TF47_PERMISSION_PLANE = _permission; };
-    case(3):{ TF47_PERMISSION_ARMOUR = _permission; };
-		case(4):{ TF47_PERMISSION_BUILDER =  _permission; };
-		case(5):{ TF47_PERMISSION_JTFC =  _permission; TF47_PERMISSION_BUILDER =  _permission; };
-  	default{};
-  };
-	if (_specialState > 0 && !_permission)then{
-		// player is not whitelisted for the use of this slot so end mission for him
-		endmission "notAuthorized";
-	};
-};
-
 player addEventHandler ["GetInMan",{
 	params ["_unit","_pos","_veh","_turrent"];
 
@@ -102,7 +75,6 @@ player addEventHandler ["GetInMan",{
 				};
 			};
 		};
-
 	};
 }];
 

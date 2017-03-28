@@ -9,5 +9,6 @@ class tf47_whitelist
 		class getDBinfo {};
 		class reportToDatabase {};
 		class initVehicleTracking {};
+		class setClientPermission {};
 	};
 };
