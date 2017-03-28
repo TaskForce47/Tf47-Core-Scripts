@@ -1,4 +1,10 @@
-// do not edit unless you know what you are doing!
+/********************************************************/
+/********************************************************/
+/*                                                      */
+/*  do not edit unless you know what you are doing!     */
+/*                                                      */
+/********************************************************/
+/********************************************************/
 #include "tf47_macros.hpp"
 
 // check wether tf47 settings hpp is present or not
