@@ -8,3 +8,8 @@
 #define ISSTRING(ARG) ( ARG isEqualType "" )
 #define ISARRAY(ARG) ( ARG isEqualType [] )
 #define EVAL(ARG,LIST) ARG = if !(ARG in LIST)then{ "" }else{ ARG }
+
+#define SETTINGS ( isClass (missionConfigFile >> "tf47_settings"))
+#define WHITELIST (getNumber (missionConfigFile >> "tf47_settings" >> "whitelist" >> "value") > 0)
+#define REPORTING (getNumber (missionConfigFile >> "tf47_settings" >> "basicReport" >> "value") > 0)
+#define TICKETS (getNumber (missionConfigFile >> "tf47_settings" >> "respawnTickets" >> "value") > 0)

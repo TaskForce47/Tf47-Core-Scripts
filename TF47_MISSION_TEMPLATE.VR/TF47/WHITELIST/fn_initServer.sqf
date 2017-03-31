@@ -30,29 +30,32 @@ TF47_PERMISSION_SERVER_STACK = [];
 "extDB3" callExtension "9:ADD_DATABASE_PROTOCOL:Database:SQL:SQL:TEXT-NULL";
 "extDB3" callExtension "9:LOCK";
 
-"tf47_whitelist_clientToServerPermissionRequest" addPublicVariableEventHandler {
-  params ["","_vars"];
-  _vars params [
-    ["_obj", objNull, ["",objnull] ],
-    ["_permissionID", 0, [0]]
-  ];
+if( WHITELIST )then{
+  "tf47_whitelist_clientToServerPermissionRequest" addPublicVariableEventHandler {
+    params ["","_vars"];
+    _vars params [
+      ["_obj", objNull, ["",objnull] ],
+      ["_permissionID", 0, [0]]
+    ];
 
-  DTRACE_3("[ INFO ] > 'Whitelist' > Request information for: ",_obj,_permissionID);
+    DTRACE_3("[ INFO ] > 'Whitelist' > Request information for: ",_obj,_permissionID);
 
-  if(_obj isEqualType "")then{
-    private _uid = allplayers apply {getPlayerUID _x};
-    private _ind = _obj find _uid;
-    if (_ind < 0)exitWith{
-      DTRACE_2("[ ERROR ] > 'Whitelist' > Player UID expected! ",_obj);
+    if(_obj isEqualType "")then{
+      private _uid = allplayers apply {getPlayerUID _x};
+      private _ind = _obj find _uid;
+      if (_ind < 0)exitWith{
+        DTRACE_2("[ ERROR ] > 'Whitelist' > Player UID expected! ",_obj);
+      };
+      _obj = allPlayers select _ind;
     };
-    _obj = allPlayers select _ind;
-  };
-  if !(isPlayer _obj) exitWith{
-    DTRACE_2("[ ERROR ] > 'Whitelist' > Player Object expected! ",_obj);
-  };
+    if !(isPlayer _obj) exitWith{
+      DTRACE_2("[ ERROR ] > 'Whitelist' > Player Object expected! ",_obj);
+    };
 
-  [_obj, _permissionID] spawn tf47_whitelist_fnc_getDBinfo;
+    [_obj, _permissionID] spawn tf47_whitelist_fnc_getDBinfo;
+  };
 };
+
 
 "tf47_whitelist_registerVehicle" addPublicVariableEventHandler {
   params ["","_vars"];
@@ -66,7 +69,9 @@ addMissionEventHandler ["HandleDisconnect",{
       if(!isNil "TF47_helper_playerFaction")then{
         [TF47_helper_playerFaction,-1] call BIS_fnc_respawnTickets;
       };
-      [5, "",_uid] call tf47_whitelist_fnc_reportToDatabase;
+      if(getNumber (missionConfigFile >> "tf47_settings" >> "basicReport" >> "value") > 0)then{
+        [5, "",_uid] call tf47_whitelist_fnc_reportToDatabase;
+      };
     };
   };
 }];
