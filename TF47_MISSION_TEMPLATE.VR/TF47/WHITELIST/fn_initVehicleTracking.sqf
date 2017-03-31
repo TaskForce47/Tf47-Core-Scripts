@@ -38,7 +38,9 @@ if (_builder isEqualTo objNull)then{
    _builder = if(isPlayer _builder)then{ name _builder }else{ "" };
 };
 if !(_builder isEqualTo "") then{
-  [95,_displayname,_builder] call tf47_whitelist_fnc_reportToDatabase;
+  if(REPORTING)then{
+    [95,_displayname,_builder] call tf47_whitelist_fnc_reportToDatabase;
+  };
 };
 
 _objectToWatch setVariable ["TF47_WHITELIST_LASTDRIVER", ["",""] ];// should uid be posted public? any privacy or safty issues?
