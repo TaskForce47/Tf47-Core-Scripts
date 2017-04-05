@@ -67,13 +67,14 @@ _objectToWatch addEventHandler ["SeatSwitched",{
     };
   }];
 
-_objectToWatch addEventHandler ["killed",{
+_objectToWatch addMPEventHandler ["MPKilled",{
     params ["_vehicle","_killer","_instigator"];
-
-    ( _vehicle getVariable ["TF47_WHITELIST_LASTDRIVER", ["",""] ] ) params ["_uid","_name"];
-    private _displayname = getText (configfile >> "cfgVehicles" >> (typeOf _vehicle) >> "displayname");
-    private _comment = format ["%1 wurde zerstoert", _displayname];
-    [4, _comment, _uid] call tf47_whitelist_fnc_reportToDatabase;
+    if isServer then{
+      ( _vehicle getVariable ["TF47_WHITELIST_LASTDRIVER", ["",""] ] ) params ["_uid","_name"];
+      private _displayname = getText (configfile >> "cfgVehicles" >> (typeOf _vehicle) >> "displayname");
+      private _comment = format ["%1 wurde zerstoert", _displayname];
+      [4, _comment, _uid] call tf47_whitelist_fnc_reportToDatabase;
+    };
 }];
 
 true
