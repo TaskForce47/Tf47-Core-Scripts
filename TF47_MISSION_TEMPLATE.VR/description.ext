@@ -1,0 +1,5 @@
+#include "tf47\config.hpp"
+class cfgfunctions
+{
+	#include "tf47\tf47_cfgfunctions.hpp"
+};
