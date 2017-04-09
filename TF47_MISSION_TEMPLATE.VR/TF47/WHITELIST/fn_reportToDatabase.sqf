@@ -79,8 +79,7 @@ if(_playerid isEqualTo "")then{
 // set some deprecated vars for compability reasons
 private _tickets = if TICKETS then{
   [TF47_helper_playerFaction,0] call BIS_fnc_respawnTickets; // any changes should happen befor calling this function
-};
-else{
+}else{
   0
 };
 if (_tickets < 0)then{_tickets = 0}; // in case respawntickets are not used
