@@ -15,11 +15,13 @@
 		[] call tf47_whitelist_fnc_initClient;
 
 */
+#include "..\tf47_macros.hpp"
+
 if(isServer || !hasInterface)exitWith{
 	DTRACE_1("[ ERROR ] > 'Whitelist' > Client initialization failed");
 	false
 };
-#include "..\tf47_macros.hpp"
+
 // init permissions - default nothing allowed
 if(isNil "TF47_PERMISSION_BUILDER")then{ TF47_PERMISSION_BUILDER = false; };
 if(isNil "TF47_PERMISSION_ARMOUR")then{ TF47_PERMISSION_ARMOUR = false; };

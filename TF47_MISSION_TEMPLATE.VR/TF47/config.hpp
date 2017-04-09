@@ -25,8 +25,8 @@ class tf47_settings
       possible options: "man", "car", "ship", "air", "static", "tank"
     */
     value = 1;
-    sides[] = [WEST,EAST,INDEPENDENT,CIVILIAN];
-    types[] = ["car","ship","air","static","tank"];
+    sides[] = {WEST,EAST,INDEPENDENT,CIVILIAN};
+    types[] = {"car","ship","air","static","tank"};
   };
   class whitelist
   {

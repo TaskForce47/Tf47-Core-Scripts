@@ -62,7 +62,7 @@ if !isServer exitWith {true};
 		["TF47_core_hc_transferObject", [_grp]] call CBA_fnc_serverEvent;
 	};
 },
-0.2
+0.2,
 []
 ] call cba_fnc_addperframehandler;
 
